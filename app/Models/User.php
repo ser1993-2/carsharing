@@ -6,7 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
+use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -28,10 +28,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    protected $hidden = ['password', 'remember_token','email_verified_at','created_at','updated_at'];
 
     /**
      * The attributes that should be cast.
@@ -41,4 +38,29 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function userRole() {
+        return $this->hasMany(UserRole::class);
+    }
+
+    public function roles() {
+        return $this->belongsToMany( Role::class,UserRole::class);
+    }
+
+    public static function updateBalance($userId, $totalCost) {
+        $user = User::find($userId);
+
+        if ($user) {
+            $user->balance = $user->balance - $totalCost;
+            $user->save();
+        }
+    }
+
+    public static function isActiveTrip($userId) {
+        $trip = Trip::where('user_id', $userId)
+            ->where('finish', null)
+            ->first();
+
+        return $trip ? true : false;
+    }
 }
