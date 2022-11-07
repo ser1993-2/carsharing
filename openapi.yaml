@@ -1,0 +1,136 @@
+openapi: 3.0.3
+info:
+  title:  carsharing
+  description: При обращение к api передать Bearer {token} в загаловке авторизации
+  version: 1.0.0
+
+servers:
+  - url: https://localhost.io/api/
+tags:
+
+paths:
+
+  /car:
+    get:
+      tags:
+        - admin/
+      summary: Получить список машин
+      description: 
+  
+  /car/{id}:
+    get:
+      tags:
+        - admin/
+      summary: Получить машину из списка по id
+      description: 
+      
+  /car/:
+    post:
+      tags:
+        - admin/
+      summary: Добавляет машину
+      description: Принимает car_brand_id, rate_id, is_active, is_free
+      
+    /car/:
+    put:
+      tags:
+        - admin/
+      summary: Редактирует машину из списка
+      description: Принимает id, car_brand_id, rate_id, is_active, is_free
+      
+  /car/id:
+    delete:
+      tags:
+        - admin/
+      summary: Удаляет машину из списка по id
+      description: 
+      
+  /user/:    
+    get:
+      tags:
+        - admin/
+      summary: Получить список пользователей
+      description: 
+  
+  /user/{id}:
+    get:
+      tags:
+        - admin/
+      summary: Получить пользователя по id
+      description: Принимает id
+      
+    /user/:
+    put:
+      tags:
+        - admin/
+      summary: Редактирует пользователя
+      description: Принимает id, name, email
+      
+  /rate:
+    get:
+      tags:
+        - admin/
+      summary: Получить тариф
+      description: Принимает name, cost
+   
+  /rate/:
+    post:
+      tags:
+        - admin/
+      summary: Добавить тариф
+      description: Принимает name, cost
+      
+  /rate//:
+    put:
+      tags:
+        - admin/
+      summary: Редактирует тариф
+      description: Принимает id, name, cost
+      
+  /user/car:
+    get:
+      tags:
+        - /
+      summary: Получить список для пользователя
+      description: 
+      
+  /user/car/id:
+    get:
+      tags:
+        - /
+      summary: Получить машину по id для пользователя
+      description: Принимает id
+      
+  /user/car/id/start:
+    post:
+      tags:
+        - /
+      summary: Начать поездку 
+      description: Принимает id
+      
+  /user/car/id/finish:
+    post:
+      tags:
+        - /
+      summary: Завершить поездку 
+      description: Принимает id
+      
+  /user/car/trip/:
+    post:
+      tags:
+        - /
+      summary: Список поездок пользователя 
+      description: 
+      
+  /user/car/trip/id:
+    post:
+      tags:
+        - /
+      summary: Информация о поездке пользователя 
+      description: Принимает id
+      
+
+
+
+
+  
